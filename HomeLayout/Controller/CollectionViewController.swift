@@ -28,11 +28,6 @@ class CollectionViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .blue
-    }
-    
     private func updateUI() {
         collectionView.reloadData()
     }
@@ -45,6 +40,7 @@ extension CollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
+        cell.backgroundColor = UIColor(253, 203, 110)
         cell.label.text = viewModel.data(at: indexPath.row)
         cell.label.font = UIFont.boldSystemFont(ofSize: 18)
         return cell

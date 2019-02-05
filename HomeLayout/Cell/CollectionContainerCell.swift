@@ -13,18 +13,16 @@ class CollectionContainerCell: UITableViewCell {
     var hostedView: UIView? {
         didSet {
             if let hostedView = hostedView {
-                self.contentView.embed(hostedView)
+                contentView.embed(hostedView)
             }
         }
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        hostedView?.removeFromSuperview()
+        if hostedView?.superview == contentView { //Make sure that hostedView hasn't been added as a subview to a different cell
+            hostedView?.removeFromSuperview()
+        }
         hostedView = nil
     }
 }

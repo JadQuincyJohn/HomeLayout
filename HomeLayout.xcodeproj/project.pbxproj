@@ -19,6 +19,7 @@
 		0D66A6A422087425003B7546 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6A322087425003B7546 /* TextViewController.swift */; };
 		0D66A6A622087FE8003B7546 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6A522087FE8003B7546 /* CollectionCell.swift */; };
 		0D66A6A822088BE8003B7546 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6A722088BE8003B7546 /* UIView+Extension.swift */; };
+		0D66A6AE22098FEE003B7546 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6AD22098FEE003B7546 /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		0D66A6A322087425003B7546 /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		0D66A6A522087FE8003B7546 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		0D66A6A722088BE8003B7546 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		0D66A6AD22098FEE003B7546 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,16 +91,15 @@
 		0D66A67C22086572003B7546 /* HomeLayout */ = {
 			isa = PBXGroup;
 			children = (
+				0D66A6AC22098EB2003B7546 /* View Model */,
+				0D66A6AB22098EA3003B7546 /* Extension */,
+				0D66A6AA22098E94003B7546 /* Cell */,
 				0D66A6A92208913F003B7546 /* Controller */,
 				0D66A67D22086572003B7546 /* AppDelegate.swift */,
 				0D66A68122086572003B7546 /* Main.storyboard */,
 				0D66A68422086573003B7546 /* Assets.xcassets */,
 				0D66A68622086573003B7546 /* LaunchScreen.storyboard */,
 				0D66A68922086573003B7546 /* Info.plist */,
-				0D66A69D22086661003B7546 /* CollectionContainerCell.swift */,
-				0D66A6A12208715B003B7546 /* ViewControllerViewModel.swift */,
-				0D66A6A522087FE8003B7546 /* CollectionCell.swift */,
-				0D66A6A722088BE8003B7546 /* UIView+Extension.swift */,
 			);
 			path = HomeLayout;
 			sourceTree = "<group>";
@@ -120,6 +121,32 @@
 				0D66A6A322087425003B7546 /* TextViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		0D66A6AA22098E94003B7546 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0D66A6A522087FE8003B7546 /* CollectionCell.swift */,
+				0D66A69D22086661003B7546 /* CollectionContainerCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0D66A6AB22098EA3003B7546 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0D66A6A722088BE8003B7546 /* UIView+Extension.swift */,
+				0D66A6AD22098FEE003B7546 /* UIColor+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		0D66A6AC22098EB2003B7546 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				0D66A6A12208715B003B7546 /* ViewControllerViewModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +253,7 @@
 				0D66A6A022086A04003B7546 /* CollectionViewController.swift in Sources */,
 				0D66A68022086572003B7546 /* ViewController.swift in Sources */,
 				0D66A6A822088BE8003B7546 /* UIView+Extension.swift in Sources */,
+				0D66A6AE22098FEE003B7546 /* UIColor+Extension.swift in Sources */,
 				0D66A6A22208715B003B7546 /* ViewControllerViewModel.swift in Sources */,
 				0D66A67E22086572003B7546 /* AppDelegate.swift in Sources */,
 				0D66A6A622087FE8003B7546 /* CollectionCell.swift in Sources */,
