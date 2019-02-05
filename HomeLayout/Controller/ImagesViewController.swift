@@ -42,7 +42,8 @@ class ImagesViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+
     private func updateUI() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -51,6 +52,7 @@ class ImagesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicatorView.hidesWhenStopped = true
         
         viewModel.dataChangedClosure = {
             self.updateUI()
@@ -63,9 +65,11 @@ class ImagesViewController: UIViewController {
     }
     
     func performFetch() {
+        activityIndicatorView.startAnimating()
         viewModel.service.getAlbums(with: viewModel.artist, limit: 100) { response, error in
             DispatchQueue.main.async {
                 self.viewModel.images = response?.albums.map { $0.cover_medium } ?? []
+                self.activityIndicatorView.stopAnimating()
             }
         }
     }

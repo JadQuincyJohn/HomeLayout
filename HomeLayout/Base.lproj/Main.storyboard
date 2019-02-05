@@ -180,6 +180,11 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" id="6lk-yB-fsZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="color" red="1" green="0.47992762579999998" blue="0.32672673070000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="xbL-ck-L3Q" customClass="ImageCell" customModule="HomeLayout" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="11.5" width="157" height="157"/>
@@ -221,6 +226,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="180"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="6lk-yB-fsZ" id="oKl-Ch-chb"/>
                         <outlet property="collectionView" destination="tiP-TD-bgU" id="mVv-Mw-2Do"/>
                     </connections>
                 </viewController>
