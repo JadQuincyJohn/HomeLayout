@@ -20,6 +20,17 @@
 		0D66A6A622087FE8003B7546 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6A522087FE8003B7546 /* CollectionCell.swift */; };
 		0D66A6A822088BE8003B7546 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6A722088BE8003B7546 /* UIView+Extension.swift */; };
 		0D66A6AE22098FEE003B7546 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6AD22098FEE003B7546 /* UIColor+Extension.swift */; };
+		0D66A6B02209C3B8003B7546 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6AF2209C3B8003B7546 /* APIService.swift */; };
+		0D66A6B32209C3ED003B7546 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6B22209C3ED003B7546 /* APIError.swift */; };
+		0D66A6BB2209C465003B7546 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6B52209C465003B7546 /* Track.swift */; };
+		0D66A6BC2209C465003B7546 /* ArtistsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6B62209C465003B7546 /* ArtistsAPIResponse.swift */; };
+		0D66A6BD2209C465003B7546 /* AlbumsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6B72209C465003B7546 /* AlbumsAPIResponse.swift */; };
+		0D66A6BE2209C465003B7546 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6B82209C465003B7546 /* Album.swift */; };
+		0D66A6BF2209C465003B7546 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6B92209C465003B7546 /* Artist.swift */; };
+		0D66A6C02209C465003B7546 /* TracksAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6BA2209C465003B7546 /* TracksAPIResponse.swift */; };
+		0D66A6C22209C4CD003B7546 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6C12209C4CD003B7546 /* ImagesViewController.swift */; };
+		0D66A6C42209C581003B7546 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6C32209C581003B7546 /* ImageCell.swift */; };
+		0D66A6C62209CDB0003B7546 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66A6C52209CDB0003B7546 /* UIImageView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +61,17 @@
 		0D66A6A522087FE8003B7546 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		0D66A6A722088BE8003B7546 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		0D66A6AD22098FEE003B7546 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		0D66A6AF2209C3B8003B7546 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		0D66A6B22209C3ED003B7546 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		0D66A6B52209C465003B7546 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		0D66A6B62209C465003B7546 /* ArtistsAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsAPIResponse.swift; sourceTree = "<group>"; };
+		0D66A6B72209C465003B7546 /* AlbumsAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsAPIResponse.swift; sourceTree = "<group>"; };
+		0D66A6B82209C465003B7546 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		0D66A6B92209C465003B7546 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		0D66A6BA2209C465003B7546 /* TracksAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksAPIResponse.swift; sourceTree = "<group>"; };
+		0D66A6C12209C4CD003B7546 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
+		0D66A6C32209C581003B7546 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		0D66A6C52209CDB0003B7546 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +113,8 @@
 		0D66A67C22086572003B7546 /* HomeLayout */ = {
 			isa = PBXGroup;
 			children = (
+				0D66A6B42209C465003B7546 /* Model */,
+				0D66A6B12209C3DC003B7546 /* API */,
 				0D66A6AC22098EB2003B7546 /* View Model */,
 				0D66A6AB22098EA3003B7546 /* Extension */,
 				0D66A6AA22098E94003B7546 /* Cell */,
@@ -119,6 +143,7 @@
 				0D66A67F22086572003B7546 /* ViewController.swift */,
 				0D66A69F22086A04003B7546 /* CollectionViewController.swift */,
 				0D66A6A322087425003B7546 /* TextViewController.swift */,
+				0D66A6C12209C4CD003B7546 /* ImagesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -128,6 +153,7 @@
 			children = (
 				0D66A6A522087FE8003B7546 /* CollectionCell.swift */,
 				0D66A69D22086661003B7546 /* CollectionContainerCell.swift */,
+				0D66A6C32209C581003B7546 /* ImageCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -137,6 +163,7 @@
 			children = (
 				0D66A6A722088BE8003B7546 /* UIView+Extension.swift */,
 				0D66A6AD22098FEE003B7546 /* UIColor+Extension.swift */,
+				0D66A6C52209CDB0003B7546 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -147,6 +174,28 @@
 				0D66A6A12208715B003B7546 /* ViewControllerViewModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		0D66A6B12209C3DC003B7546 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0D66A6AF2209C3B8003B7546 /* APIService.swift */,
+				0D66A6B22209C3ED003B7546 /* APIError.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		0D66A6B42209C465003B7546 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0D66A6B52209C465003B7546 /* Track.swift */,
+				0D66A6B62209C465003B7546 /* ArtistsAPIResponse.swift */,
+				0D66A6B72209C465003B7546 /* AlbumsAPIResponse.swift */,
+				0D66A6B82209C465003B7546 /* Album.swift */,
+				0D66A6B92209C465003B7546 /* Artist.swift */,
+				0D66A6BA2209C465003B7546 /* TracksAPIResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,15 +299,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D66A6C22209C4CD003B7546 /* ImagesViewController.swift in Sources */,
 				0D66A6A022086A04003B7546 /* CollectionViewController.swift in Sources */,
 				0D66A68022086572003B7546 /* ViewController.swift in Sources */,
+				0D66A6C42209C581003B7546 /* ImageCell.swift in Sources */,
 				0D66A6A822088BE8003B7546 /* UIView+Extension.swift in Sources */,
+				0D66A6BD2209C465003B7546 /* AlbumsAPIResponse.swift in Sources */,
 				0D66A6AE22098FEE003B7546 /* UIColor+Extension.swift in Sources */,
+				0D66A6BC2209C465003B7546 /* ArtistsAPIResponse.swift in Sources */,
 				0D66A6A22208715B003B7546 /* ViewControllerViewModel.swift in Sources */,
 				0D66A67E22086572003B7546 /* AppDelegate.swift in Sources */,
+				0D66A6C62209CDB0003B7546 /* UIImageView+Extension.swift in Sources */,
+				0D66A6B02209C3B8003B7546 /* APIService.swift in Sources */,
 				0D66A6A622087FE8003B7546 /* CollectionCell.swift in Sources */,
 				0D66A69E22086661003B7546 /* CollectionContainerCell.swift in Sources */,
 				0D66A6A422087425003B7546 /* TextViewController.swift in Sources */,
+				0D66A6C02209C465003B7546 /* TracksAPIResponse.swift in Sources */,
+				0D66A6B32209C3ED003B7546 /* APIError.swift in Sources */,
+				0D66A6BB2209C465003B7546 /* Track.swift in Sources */,
+				0D66A6BF2209C465003B7546 /* Artist.swift in Sources */,
+				0D66A6BE2209C465003B7546 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

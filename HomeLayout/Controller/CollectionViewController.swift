@@ -40,9 +40,9 @@ extension CollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
-        cell.backgroundColor = UIColor(253, 203, 110)
+        cell.backgroundColor = UIColor(230, 126, 34)
         cell.label.text = viewModel.data(at: indexPath.row)
-        cell.label.font = UIFont.boldSystemFont(ofSize: 18)
+        cell.label.textColor = UIColor(44, 62, 80)
         return cell
     }
 }

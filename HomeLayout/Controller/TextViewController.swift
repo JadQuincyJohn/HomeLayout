@@ -31,6 +31,6 @@ class TextViewController: UIViewController {
     
     private func updateUI() {
         label.text = viewModel.text
-        label.textColor = .orange
+        label.textColor = UIColor(192, 57, 43)
     }
 }

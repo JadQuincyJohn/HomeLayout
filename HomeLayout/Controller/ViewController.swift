@@ -17,12 +17,15 @@ class ViewController: UIViewController {
     
     let viewModel = ViewControllerViewModel()
     
+    let service = APIService()
+    
     static let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
         setupTableView()
+        navigationItem.largeTitleDisplayMode = .always
     }
 }
 
@@ -41,6 +44,8 @@ extension ViewController: UITableViewDataSource {
             (controller as! CollectionViewController).viewModel = CollectionViewControllerViewModel(data: list)
         case .text(let text):
             (controller as! TextViewController).viewModel = TextViewControllerViewModel(text: text)
+        case .images(let artist):
+            (controller as! ImagesViewController).viewModel = ImagesViewControllerViewModel(artist: artist, service: service)
         }
         
         viewControllersByIndexPath[indexPath] = controller
@@ -58,6 +63,8 @@ extension ViewController: UITableViewDelegate {
             return 60
         case .list:
             return 130
+        case .images:
+            return 200
         }
     }
     
@@ -75,19 +82,19 @@ private extension ViewController {
     func setupNavigationItem() {
         let label = UILabel()
         label.text = viewModel.title
-        label.numberOfLines = 3
+        label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = UIColor.black
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.shadowColor = UIColor(211, 84, 0)
+        label.shadowOffset = CGSize(width: 1, height: 1)
+        label.textColor = UIColor(241, 196, 15)
         
         navigationItem.titleView = label
     }
     
     func setupTableView() {
         tableView.register(CollectionContainerCell.self, forCellReuseIdentifier: String(describing: "CollectionContainerCell"))
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: "NormalCell"))
-        tableView.separatorInset = .zero
-        tableView.separatorColor = .orange
+        tableView.separatorStyle = .none
     }
     
     
@@ -106,6 +113,8 @@ private extension ViewController {
             cclass = CollectionViewController.self
         case .text:
             cclass = TextViewController.self
+        case .images:
+            cclass = ImagesViewController.self
         }
         
         let elligibleController = unusedViewControllers.first {
@@ -124,6 +133,10 @@ private extension ViewController {
             return controller
         case .list:
             let controller = ViewController.storyboard.instantiateViewController(withIdentifier: String(describing: CollectionViewController.self)) as! CollectionViewController
+            addChildContentViewController(child: controller)
+            return controller
+        case .images:
+            let controller = ViewController.storyboard.instantiateViewController(withIdentifier: String(describing: ImagesViewController.self)) as! ImagesViewController
             addChildContentViewController(child: controller)
             return controller
         }
