@@ -25,7 +25,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationItem()
         setupTableView()
-        navigationItem.largeTitleDisplayMode = .always
     }
 }
 
@@ -74,6 +73,13 @@ extension ViewController: UITableViewDelegate {
             viewControllersByIndexPath.removeValue(forKey: indexPath)
             unusedViewControllers.insert(controller)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let controller = viewControllersByIndexPath[indexPath]
+        guard let imagesViewController = controller as? ImagesViewController else { return }
+        imagesViewController.performFetch()
     }
 }
 

@@ -56,5 +56,7 @@ struct ViewControllerViewModel {
                               .images(4064),
                               .text("Albums de J.Rocc"),
                               .images(494972),
+                              .text("Albums de Beatles"),
+                              .images(1),
                               ]
 }

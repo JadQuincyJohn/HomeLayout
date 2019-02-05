@@ -59,12 +59,9 @@ class ImagesViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        performFetch()
-    }
-    
     func performFetch() {
+        print("-----------------------------")
+        print("performFetch with artist id: \(viewModel.artist)")
         activityIndicatorView.startAnimating()
         viewModel.service.getAlbums(with: viewModel.artist, limit: 100) { response, error in
             DispatchQueue.main.async {

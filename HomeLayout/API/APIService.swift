@@ -30,12 +30,9 @@ class APIService {
     typealias JSONDictionary = [String: Any]
     //TODO: Add a proper error type here
     typealias APICompletion = (_ data: Data?, _ error: APIError?) -> Void
-    typealias ArtistsAPICompletion = (_ results: ArtistsAPIResponse?, _ error: APIError?) -> Void
     typealias AlbumsAPICompletion = (_ results: AlbumsAPIResponse?, _ error: APIError?) -> Void
-    typealias TracksAPICompletion = (_ results: TracksAPIResponse?, _ error: APIError?) -> Void
     
     let defaultSession: URLSessionProtocol
-    var defaultDataTask: URLSessionDataTaskProtocol?
     
     init() {
         defaultSession = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -45,46 +42,11 @@ class APIService {
         defaultSession = session
     }
     
-    // MARK: - Search Artists
-    func searchArtists(like searchTerm: String, completion: @escaping ArtistsAPICompletion = {_, _ in}) {
-        guard var urlComponents = URLComponents(string: "https://api.deezer.com/search/artist") else {
-            completion(nil, APIError.malformedURLError)
-            return
-        }
-        urlComponents.query = "q=\(searchTerm)"
-        guard let url = urlComponents.url else {
-            completion(nil, APIError.malformedURLError)
-            return
-        }
-        
-        performDataTask(with: url) { data, error in
-            if let data = data {
-                let (artistsAPIResponse, decodingError) = self.decodeAPIResponse(data, responseType: ArtistsAPIResponse.self)
-                completion(artistsAPIResponse, decodingError)
-            } else {
-                completion(nil, error)
-            }
-        }
-    }
-    
-    func getNextArtists(artistsAPIResponse: ArtistsAPIResponse, completion: @escaping ArtistsAPICompletion = {_, _ in}) {
-        guard let nextArtistsURL = artistsAPIResponse.nextArtistsURL else {
-            completion(nil, APIError.noAdditionalResultsError)
-            return
-        }
-        
-        performDataTask(with: nextArtistsURL) { data, error in
-            if let data = data {
-                let (newArtistsAPIResponse, decodingError) = self.decodeAPIResponse(data, responseType: ArtistsAPIResponse.self)
-                completion(newArtistsAPIResponse, decodingError)
-            } else {
-                completion(nil, error)
-            }
-        }
-    }
-    
     // MARK: - Get Albums from artist
     func getAlbums(with artistId: Int, limit: Int = 1, completion: @escaping AlbumsAPICompletion = {_, _ in}) {
+        
+        print("getAlbums with artist id: \(artistId)")
+        
         guard var urlComponents = URLComponents(string: "https://api.deezer.com/artist/\(artistId)/albums") else {
             completion(nil, APIError.malformedURLError)
             return
@@ -108,48 +70,13 @@ class APIService {
             }
         }
     }
-    
-    // MARK: - Get Tracks from album
-    func getTracks(fromAlbum album: Album, completion: @escaping TracksAPICompletion = {_, _ in}) {
-        guard let url = URL(string: "https://api.deezer.com/album/\(album.id)/tracks") else {
-            completion(nil, APIError.malformedURLError)
-            return
-        }
-        
-        performDataTask(with: url) { data, error in
-            if let data = data {
-                let (tracksAPIResponse, decodingError) = self.decodeAPIResponse(data, responseType: TracksAPIResponse.self)
-                completion(tracksAPIResponse, decodingError)
-            } else {
-                completion(nil, error)
-            }
-        }
-    }
-    
-    func getNextTracks(fromTracksAPIResponse tracksAPIResponse: TracksAPIResponse, completion: @escaping TracksAPICompletion = {_, _ in}) {
-        guard let nextTracksURL = tracksAPIResponse.nextTracksURL else {
-            completion(nil, APIError.noAdditionalResultsError)
-            return
-        }
-        
-        performDataTask(with: nextTracksURL) { data, error in
-            if let data = data {
-                let (newTracksAPIResponse, decodingError) = self.decodeAPIResponse(data, responseType: TracksAPIResponse.self)
-                completion(newTracksAPIResponse, decodingError)
-            } else {
-                completion(nil, error)
-            }
-        }
-    }
 }
 
 // MARK: - Generic Data task method
 extension APIService {
     func performDataTask(with url: URL, completion: @escaping APICompletion = {_, _ in}) {
-        defaultDataTask?.cancel()
-        
-        defaultDataTask = defaultSession.dataTask(with: url) { data, response, error in
-            defer { self.defaultDataTask = nil }
+
+        let task = defaultSession.dataTask(with: url) { data, response, error in
             
             let statusCode: Int
             if let response = response as? HTTPURLResponse {
@@ -164,7 +91,7 @@ extension APIService {
                 completion(data, nil)
             }
         }
-        defaultDataTask?.resume()
+        task.resume()
     }
 }
 
