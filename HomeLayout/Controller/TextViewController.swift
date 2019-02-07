@@ -8,8 +8,12 @@
 
 import UIKit
 
-struct TextViewControllerViewModel {
+class TextViewControllerViewModel {
     let text: String
+    
+    init(text: String) {
+        self.text = text
+    }
 }
 
 class TextViewController: UIViewController {

@@ -8,11 +8,11 @@
 
 import UIKit
 
-struct ImagesViewControllerViewModel {
+class ImagesViewControllerViewModel {
     
     let artist: Int
     let service: APIService
-
+    
     var images: [URL] = [] {
         didSet {
             dataChangedClosure?()
@@ -29,12 +29,39 @@ struct ImagesViewControllerViewModel {
         self.service = service
         self.artist = artist
     }
+    
+    func performFetch(completion: @escaping AlbumsAPICompletion) {
+    
+        guard images.count == 0 else {
+            print("-----------------------------")
+            print("Performed [CACHE] search with artist id: \(artist)")
+            completion(nil, nil)
+            return
+        }
+        
+        print("-----------------------------")
+        print("Performed [WEB]  search with artist id: \(artist)")
+
+        service.getAlbums(with: artist, limit: 100) { response, error in
+            DispatchQueue.main.async {
+                print("-----------------------------")
+                print("Received [WEB] results with artist id: \(self.artist)")
+                self.images = response?.albums.map { $0.cover_medium } ?? []
+                completion(response, error)
+            }
+        }
+    }
 }
 
 class ImagesViewController: UIViewController {
     
     var viewModel: ImagesViewControllerViewModel! {
         didSet {
+            
+            viewModel.dataChangedClosure = {
+                self.updateUI()
+            }
+            
             DispatchQueue.main.async {
                 self.updateUI()
             }
@@ -43,7 +70,7 @@ class ImagesViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-
+    
     private func updateUI() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -53,19 +80,13 @@ class ImagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicatorView.hidesWhenStopped = true
-        
-        viewModel.dataChangedClosure = {
-            self.updateUI()
-        }
     }
     
-    func performFetch() {
-        print("-----------------------------")
-        print("performFetch with artist id: \(viewModel.artist)")
+    func performFetchIfNeeded() {
+        
         activityIndicatorView.startAnimating()
-        viewModel.service.getAlbums(with: viewModel.artist, limit: 100) { response, error in
+        viewModel.performFetch { (response, error) in
             DispatchQueue.main.async {
-                self.viewModel.images = response?.albums.map { $0.cover_medium } ?? []
                 self.activityIndicatorView.stopAnimating()
             }
         }

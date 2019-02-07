@@ -12,9 +12,8 @@ class CollectionContainerCell: UITableViewCell {
     
     var hostedView: UIView? {
         didSet {
-            if let hostedView = hostedView {
-                contentView.embed(hostedView)
-            }
+            guard let hostedView = hostedView else { return }
+            contentView.embed(hostedView)
         }
     }
     
@@ -26,3 +25,6 @@ class CollectionContainerCell: UITableViewCell {
         hostedView = nil
     }
 }
+
+
+

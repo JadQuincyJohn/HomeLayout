@@ -9,9 +9,21 @@
 import UIKit
 
 enum ModelType {
+    
     case list([Int])
     case text(String)
     case images(Int)
+    
+    var className: AnyClass {
+        switch self {
+        case .list:
+            return CollectionViewController.self
+        case .text:
+            return TextViewController.self
+        case .images:
+            return ImagesViewController.self
+        }
+    }
 }
 
 struct ViewControllerViewModel {
@@ -58,5 +70,9 @@ struct ViewControllerViewModel {
                               .images(494972),
                               .text("Albums de Beatles"),
                               .images(1),
+                              .text("Albums de the Clash"),
+                              .images(2),
+                              .text("Albums de Snoop"),
+                              .images(3),
                               ]
 }

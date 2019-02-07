@@ -14,9 +14,9 @@ class ViewController: UIViewController {
     
     var unusedViewControllers: Set<UIViewController> = Set()
     var viewControllersByIndexPath: [IndexPath : UIViewController] = [:]
-    
+    var viewModelsByIndexPath: [IndexPath : AnyObject] = [:]
+
     let viewModel = ViewControllerViewModel()
-    
     let service = APIService()
     
     static let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -37,17 +37,19 @@ extension ViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionContainerCell") as! CollectionContainerCell
         let controller = recycledOrNewViewController(indexPath: indexPath)
-        
+        let recycledOrNewViewModel = self.recycledOrNewViewModel(indexPath: indexPath)
+
         switch viewModel.model[indexPath.row] {
-        case .list(let list):
-            (controller as! CollectionViewController).viewModel = CollectionViewControllerViewModel(data: list)
-        case .text(let text):
-            (controller as! TextViewController).viewModel = TextViewControllerViewModel(text: text)
-        case .images(let artist):
-            (controller as! ImagesViewController).viewModel = ImagesViewControllerViewModel(artist: artist, service: service)
+        case .list:
+            (controller as! CollectionViewController).viewModel = recycledOrNewViewModel as? CollectionViewControllerViewModel
+        case .text:
+            (controller as! TextViewController).viewModel = recycledOrNewViewModel as? TextViewControllerViewModel
+        case .images:
+            (controller as! ImagesViewController).viewModel = recycledOrNewViewModel as? ImagesViewControllerViewModel
         }
         
         viewControllersByIndexPath[indexPath] = controller
+        viewModelsByIndexPath[indexPath] = recycledOrNewViewModel
         cell.hostedView = controller.view
         cell.selectionStyle = .none
         return cell
@@ -79,7 +81,7 @@ extension ViewController: UITableViewDelegate {
         
         let controller = viewControllersByIndexPath[indexPath]
         guard let imagesViewController = controller as? ImagesViewController else { return }
-        imagesViewController.performFetch()
+        imagesViewController.performFetchIfNeeded()
     }
 }
 
@@ -103,28 +105,31 @@ private extension ViewController {
         tableView.separatorStyle = .none
     }
     
-    
-    func addChildContentViewController(child: UIViewController) {
-        addChild(child)
-        child.didMove(toParent: self)
+    func recycledOrNewViewModel(indexPath: IndexPath) -> AnyObject {
+        
+        if let existingViewModel = viewModelsByIndexPath[indexPath] {
+            return existingViewModel
+        }
+        
+        switch viewModel.model[indexPath.row] {
+        case .list(let list):
+            let viewModel = CollectionViewControllerViewModel(data: list)
+            return viewModel
+        case .text(let text):
+            let viewModel = TextViewControllerViewModel(text: text)
+            return viewModel
+        case .images(let artist):
+            let viewModel = ImagesViewControllerViewModel(artist: artist, service: service)
+            return viewModel
+        }
     }
     
     func recycledOrNewViewController(indexPath: IndexPath) -> UIViewController {
         
         let t = viewModel.model[indexPath.row]
-        var cclass: AnyClass
-        
-        switch t {
-        case .list:
-            cclass = CollectionViewController.self
-        case .text:
-            cclass = TextViewController.self
-        case .images:
-            cclass = ImagesViewController.self
-        }
         
         let elligibleController = unusedViewControllers.first {
-            $0.isKind(of: cclass)
+            $0.isKind(of: t.className)
         }
         
         if let elligibleController = elligibleController {
@@ -134,17 +139,25 @@ private extension ViewController {
         
         switch t {
         case .text:
-            let controller = ViewController.storyboard.instantiateViewController(withIdentifier: String(describing: TextViewController.self)) as! TextViewController
-            addChildContentViewController(child: controller)
-            return controller
+            let textViewController: TextViewController = add()
+            return textViewController
         case .list:
-            let controller = ViewController.storyboard.instantiateViewController(withIdentifier: String(describing: CollectionViewController.self)) as! CollectionViewController
-            addChildContentViewController(child: controller)
-            return controller
+            let collectionViewController: CollectionViewController = add()
+            return collectionViewController
         case .images:
-            let controller = ViewController.storyboard.instantiateViewController(withIdentifier: String(describing: ImagesViewController.self)) as! ImagesViewController
-            addChildContentViewController(child: controller)
-            return controller
+            let imagesviewController: ImagesViewController = add()
+            return imagesviewController
         }
+    }
+    
+    func add<T: UIViewController>() -> T {
+        let controller = ViewController.storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
+        addChildContentViewController(child: controller)
+        return controller
+    }
+    
+    func addChildContentViewController(child: UIViewController) {
+        addChild(child)
+        child.didMove(toParent: self)
     }
 }

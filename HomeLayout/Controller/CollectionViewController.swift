@@ -8,11 +8,15 @@
 
 import UIKit
 
-struct CollectionViewControllerViewModel {
+class CollectionViewControllerViewModel {
     let data: [Int]
     
     func data(at index: Int) -> String {
         return String(data[index])
+    }
+    
+    init(data: [Int]){
+        self.data = data
     }
 }
 

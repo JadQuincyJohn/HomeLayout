@@ -25,12 +25,13 @@ protocol URLSessionDataTaskProtocol {
 }
 extension URLSessionDataTask: URLSessionDataTaskProtocol {}
 
+typealias AlbumsAPICompletion = (_ results: AlbumsAPIResponse?, _ error: APIError?) -> Void
+
 // MARK: -
 class APIService {
     typealias JSONDictionary = [String: Any]
     //TODO: Add a proper error type here
     typealias APICompletion = (_ data: Data?, _ error: APIError?) -> Void
-    typealias AlbumsAPICompletion = (_ results: AlbumsAPIResponse?, _ error: APIError?) -> Void
     
     let defaultSession: URLSessionProtocol
     
